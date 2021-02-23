@@ -9,22 +9,78 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+library(tidyverse)
+library(readxl)
+library(here)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+ca_np <- read_csv(here("data", "ca_np.csv"))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+ci_np <- read_excel(here("data", "ci_np.xlsx"))
+```
+
+
+```{r}
+ggplot(data = ci_np, aes(x = year, y = visitors)) +
+  geom_line()
+```
+
+```{r}
+gg_base <- ggplot(data = ci_np, aes(x = year, y = visitors))
+```
+
+```{r}
+gg_base +
+  geom_point()
+```
+
+```{r}
+gg_base +
+  geom_col()
+```
+
+```{r}
+gg_base +
+  geom_area()
+```
+
+```{r}
+ggplot(data = ci_np, aes(x = year, y = visitors)) +
+  geom_line(
+    color = "green1",
+    linetype = "dashed"
+  )
+```
+
+```{r}
+gg_base +
+  geom_point(color = "purple",
+             pch = 17,
+             size = 4,
+             alpha = 0.5)
+```
+
+```{r}
+gg_base +
+  geom_area(color='red',
+            alpha=0.2)
+```
+
+```{r}
+gg_base + 
+  geom_point(
+    aes(size = visitors,
+        color = visitors),
+    alpha = 0.5
+  )
+```
+
+```{r}
+gg_base + 
+  geom_col(aes(fill = visitors))
+```
+
