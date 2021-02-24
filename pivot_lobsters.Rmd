@@ -75,3 +75,24 @@ ggplot(data=siteyear_summary, aes(x=year, y=median_size_mm, color = site)) +
 ggsave(here('figures','lobsters-line.png'))
 ```
 
+
+```{r}
+lobsters %>%
+  count(site, year)
+```
+
+There are `r count(lobsters)` total lobsters included in this summary.
+
+
+```{r}
+lobsters_detailed <- lobsters %>%
+  mutate(size_m = size_mm/1000,
+         millenia = 2000,
+         observer = "Girolamo D'Anneo")
+```
+
+```{r}
+lobsters_detailed %>%
+  select(date, site, size_m)
+```
+
