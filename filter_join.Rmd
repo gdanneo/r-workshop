@@ -1,0 +1,73 @@
+---
+title: "filter_join"
+author: "gd"
+date: "25/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(here) 
+library(kableExtra)
+```
+
+```{r}
+fish <- read_csv(here('data', 'fish.csv'))
+kelp_abur <- read_excel(here('data', 'kelp.xlsx'), sheet = 'abur' )
+```
+
+```{r}
+fish_garibaldi <- fish %>%
+  filter(common_name == "garibaldi")
+```
+
+```{r}
+fish_over50 <- fish %>%
+  filter(total_count >= 50)
+```
+
+```{r}
+fish %>%
+  filter(common_name == "garibaldi" |
+           common_name == "blacksmith" |
+           common_name == "black surfperch")
+```
+
+```{r}
+fish_gar_2016 <- fish %>%
+  filter(year == 2016 |
+           common_name == "garibaldi")
+```
+
+```{r}
+aque_2018 <- fish %>%
+  filter(year == 2018, site == "aque")
+```
+
+```{r}
+low_gb_wr <- fish %>%
+  filter(common_name == "garibaldi" |
+           common_name == "rock wrasse") %>%
+  filter(total_count <= 10)
+```
+
+```{r}
+fish_black <- fish %>%
+  filter(str_detect(common_name, "black"))
+```
+
+```{r}
+fish_it <- fish %>%
+  filter(str_detect(common_name, "it"))
+```
+
+```{r}
+fish_no_it <- fish %>%
+  filter(str_detect(common_name, "it", negate = T))
+```
+
