@@ -71,3 +71,19 @@ fish_no_it <- fish %>%
   filter(str_detect(common_name, "it", negate = T))
 ```
 
+```{r}
+abur_kelp_fish <- kelp_abur %>%
+  full_join(fish, by = c("year", "site"))
+```
+
+```{r}
+kable(aque_2018)
+```
+
+```{r}
+aque_2018 %>%
+  kable() %>%
+  kable_styling(bootstrap_options = "striped", 
+                full_width = FALSE)
+```
+
